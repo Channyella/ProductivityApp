@@ -25,8 +25,9 @@ public class ToDoList
     public required string Title { get; set; }
     public string? Description {get; set; }
     public TagEnum? Tag { get; set; }
-    public DateOnly? StartDate{ get; set; }
+    public required DateOnly CreateDate{ get; set; } = DateOnly.FromDateTime(DateTime.Now);
     public DateOnly? EndDate { get; set; }
+    public bool Completed { get; set; } = false;
 
     // Navigation property for AppUser
     public required AppUser User { get; set; }

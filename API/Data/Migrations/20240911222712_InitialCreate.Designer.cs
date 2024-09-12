@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240830230633_AllEntities")]
-    partial class AllEntities
+    [Migration("20240911222712_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,9 @@ namespace API.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("CreatedDate")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -47,11 +50,17 @@ namespace API.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("API.Entities.Task", b =>
+            modelBuilder.Entity("API.Entities.Subtask", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Completed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("CreateDate")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -60,20 +69,14 @@ namespace API.Data.Migrations
                     b.Property<DateOnly?>("EndDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Recurring")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateOnly?>("StartDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ToDoListId")
+                    b.Property<int>("UserTaskId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ToDoListId");
+                    b.HasIndex("UserTaskId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Subtasks");
                 });
 
             modelBuilder.Entity("API.Entities.ToDoList", b =>
@@ -82,13 +85,16 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("Completed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("CreateDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
                     b.Property<DateOnly?>("EndDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateOnly?>("StartDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("Tag")
@@ -108,15 +114,44 @@ namespace API.Data.Migrations
                     b.ToTable("ToDoLists");
                 });
 
-            modelBuilder.Entity("API.Entities.Task", b =>
+            modelBuilder.Entity("API.Entities.UserTask", b =>
                 {
-                    b.HasOne("API.Entities.ToDoList", "ToDoList")
-                        .WithMany("Tasks")
-                        .HasForeignKey("ToDoListId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Completed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("CreateDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateOnly?>("EndDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ToDoListId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ToDoListId");
+
+                    b.ToTable("UserTasks");
+                });
+
+            modelBuilder.Entity("API.Entities.Subtask", b =>
+                {
+                    b.HasOne("API.Entities.UserTask", "UserTask")
+                        .WithMany("Subtasks")
+                        .HasForeignKey("UserTaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ToDoList");
+                    b.Navigation("UserTask");
                 });
 
             modelBuilder.Entity("API.Entities.ToDoList", b =>
@@ -130,6 +165,17 @@ namespace API.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("API.Entities.UserTask", b =>
+                {
+                    b.HasOne("API.Entities.ToDoList", "ToDoList")
+                        .WithMany("Tasks")
+                        .HasForeignKey("ToDoListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ToDoList");
+                });
+
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
                     b.Navigation("ToDoLists");
@@ -138,6 +184,11 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.ToDoList", b =>
                 {
                     b.Navigation("Tasks");
+                });
+
+            modelBuilder.Entity("API.Entities.UserTask", b =>
+                {
+                    b.Navigation("Subtasks");
                 });
 #pragma warning restore 612, 618
         }
