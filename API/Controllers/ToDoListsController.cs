@@ -6,9 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[Route("api/[controller]")] // /api/todolists
-[ApiController]
-public class ToDoListsController(DataContext context) : ControllerBase
+public class ToDoListsController(DataContext context) : BaseApiController
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ToDoList>>> GetToDoLists()

@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[Route("api/[controller]")]  // /api/tasks
-[ApiController]
-public class TasksController(DataContext context) : ControllerBase
+public class TasksController(DataContext context) : BaseApiController
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserTask>>> GetTasks()
