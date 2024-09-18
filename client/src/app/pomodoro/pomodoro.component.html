@@ -1,20 +1,36 @@
 <body>
     <div class="pomodoro-container">
         <div class="type-container">
-            <button #pomodorobtn id="pomodorobtn" class="active">Pomodoro</button>
-            <button #shortbreakbtn id="shortbreakbtn">Short break</button>
-            <button #longbreakbtn id="longbreakbtn">Long break</button>
+            <button #pomodoroBtn 
+                id="pomodorobtn" 
+                class="active"
+                [ngClass]="{'active': pomodoroType === 'POMODORO'}" 
+                (click)="setTimeType('POMODORO')">Pomodoro</button>
+            <button #shortBreakBtn 
+                id="shortbreakbtn"
+                [ngClass]="{'active': pomodoroType === 'SHORTBREAK'}" 
+                (click)="setTimeType('SHORTBREAK')">Short break</button>
+            <button #longBreakBtn 
+                id="longbreakbtn"
+                [ngClass]="{'active': pomodoroType === 'LONGBREAK'}" 
+                (click)="setTimeType('LONGBREAK')">Long break</button>
         </div>
-        <div class="pomodoro-count"></div>
-        <div class="progressbar">
+        <div #pomodoroCount class="pomodoro-count"></div>
+        <div #progressBar class="progressbar">
             <div class="progressbar-inner">
-                <h2 class="progressbar-number">25:00</h2>
+                <h2 #progressBarNumber class="progressbar-number">25:00</h2>
             </div>
         </div>
         <div class="function-buttons">
-            <button id="startbtn">Start</button>
-            <button id="pausebtn">Pause</button>
-            <button id="resetbtn">Reset</button>
+            <button #startBtn 
+                id="startbtn"
+                (click)="startTimer()">Start</button>
+            <button #pauseBtn 
+                id="pausebtn"
+                (click)="pauseTimer()">Pause</button>
+            <button #resetBtn 
+                id="resetbtn"
+                (click)="resetTimer()">Reset</button>
         </div>
     </div>
 </body>
