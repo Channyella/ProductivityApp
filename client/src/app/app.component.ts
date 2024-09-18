@@ -10,7 +10,7 @@ import { NavComponent } from "./nav/nav.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   http = inject(HttpClient);
   title = 'Pomo-Doer';
   users: any;
