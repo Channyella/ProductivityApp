@@ -1,0 +1,53 @@
+<form #loginForm = "ngForm" (ngSubmit)="register()" autocomplete="off">
+    <h2 class="text-center text-primary">Sign Up</h2>
+    <hr>
+    <div class="mb-3 form-floating">
+        <input type="text" 
+        name="firstName" 
+        [(ngModel)]="model.firstName" 
+        class="form-control me-2" 
+        placeholder="First Name">
+        <label>First Name:</label>
+    </div>
+    <div class="mb-3 form-floating">
+        <input type="text" 
+        name="lastName" 
+        [(ngModel)]="model.lastName" 
+        class="form-control me-2" 
+        placeholder="Last Name">
+        <label>Last Name:</label>
+    </div>
+    <div class="mb-3 form-floating">
+        <input type="email" 
+        name="email" 
+        [(ngModel)]="model.email" 
+        class="form-control me-2" 
+        placeholder="E-mail">
+        <label>E-mail:</label>
+    </div>
+    <div class="mb-3 form-floating">
+        <input type="password" 
+        name="password" 
+        [(ngModel)]="model.password" 
+        class="form-control me-2" 
+        placeholder="Password">
+        <label>Password:</label>
+    </div>
+    <div class="mb-3 form-floating">
+        <input type="password" 
+        name="verifyPassword" 
+        [(ngModel)]="model.verifyPassword" 
+        class="form-control me-2" 
+        placeholder="Re-enter Password">
+        <label>Confirm Password:</label>
+    </div>
+    <div class="form-group text-center">
+        <button class="btn btn-success me-2" type="submit">Register</button>
+        <button class="btn btn-default me-2" (click)="cancel()" type="button">Cancel</button>
+
+    </div>
+
+        <button class="btn btn-outline-success" type="submit">Login</button>
+
+
+</form>

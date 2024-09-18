@@ -4,7 +4,7 @@
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
             <img
             class="bi me-2"
-            width="50"
+            width="60"
             height="32"
             role="img"
             aria-label="Pomo-Doer"
@@ -14,31 +14,25 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><h3><a href="#" class="nav-link px-2 link-secondary">Pomo-Doer</a></h3></li>
+            <li><h3><a href="home" class="nav-link px-2 link-secondary">Pomo-Doer</a></h3></li>
         </ul>
 
-        <form #loginForm= "ngForm" (ngSubmit)="login()" class="d-flex justify" autocomplete="off">
-            <input name="email" [(ngModel)]="model.email" class="form-control me-2" placeholder="E-mail">
-            <input name="password" [(ngModel)]="model.password" class="form-control me-2" placeholder="Password" type="password">
-            <button class="btn btn-outline-success" type="submit">Login</button>
-        </form>
+        <h5 class="me-3"> Welcome user </h5>
 
-        <h5> Welcome {{users.firstName}} </h5>
-
-        <div class="dropdown text-end">
-            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <div dropdown class="dropdown text-end me-3">
+            <a dropdownToggle class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="/assets/pomodoer_assets/favicon.ico" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
-            <ul class="dropdown-menu text-small" style="">
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <ul *dropdownMenu class="dropdown-menu text-small" style="">
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item"(click)="logout()">Logout</a></li>
             </ul>
         </div>
         <img
             class="bi me-2"
-            width="50"
+            width="60"
             height="32"
             role="img"
             aria-label="Pomo-Doer"
