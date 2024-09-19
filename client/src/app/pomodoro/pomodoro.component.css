@@ -1,8 +1,7 @@
-body {
+:host {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,22 +9,28 @@ body {
 }
 .pomodoro-container {
     width: 80%;
-    height: 400px;
+    height: 40%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    background-color: #00003D;
-    padding: 50px 20px;
+    justify-content: space-evenly;
+    background-color: #ed6456;
+    padding: 20px 20px;
     border-radius: 15px;
 }
 
-.type-container {
-    margin-bottom: 50px;
+.buttons-container {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 80%;
+}
+
+.type-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    
 }
 
 .type-container button {
@@ -33,10 +38,11 @@ body {
     border: none;
     border-radius: 5px;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
-    color: #ffffff;
+    color: #636363;
     font-weight: bold;
-    background-color: #f3486d;
+    background-color: white;
     cursor: pointer;
+    text-wrap: nowrap;
 }
 
 .type-container button:hover {
@@ -44,7 +50,8 @@ body {
 }
 
 .type-container .active {
-    background-color: #db2a34;
+    background-color: #3f6644;
+    color: white;
 }
 
 #longbreakbtn {
@@ -58,11 +65,15 @@ body {
 .function-buttons {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 20px;
     width: 80%;
+
 }
-.function-buttons button:hover {
-    transform: scale(1.2);
+
+.function-buttons button {
+    color: white;
+    font-weight: bold;
+    background-color: #61946f;
 }
 
 #startbtn,
@@ -72,24 +83,28 @@ body {
         border: none;
         border-radius: 5px;
         box-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
-        color: #ffffff;
-        font-weight: bold;
-        background-color: #f3486d;
+
         cursor: pointer;
 }
-#startbtn {
-        background-color: #008000;
+
+.function-buttons button:hover {
+    transform: scale(1.2);
+    background-color: #3f6644;
+    color:white;
 }
-#pausebtn {
-        background-color: #db2a34;
+
+
+.vertical-bar {
+    border-left: 1px solid white;
+    height: 80px;
+    margin-right: 40px;
+    margin-left: 40px;
 }
-#resetbtn {
-        background-color: #ffa600;
-}
+
 .progressbar {
         height: 180px;
         width: 180px;
-        background: conic-gradient(crimson 0deg, rgb(243, 72, 109) 
+        background: conic-gradient(rgb(63, 102, 68) 0deg, #61946f
         0deg);
         border-radius: 50%;
         display: flex;
@@ -97,12 +112,11 @@ body {
         justify-content: center;
         animation: pulse 3s infinite;
         transition: all ease;
-        margin-bottom: 50px;
 }
 .progressbar-inner {
         height: 90%;
         width: 90%;
-        background:#03033f;
+        background:#ed6456;
         border-radius: 50%;
         display: flex;
         align-items: center;

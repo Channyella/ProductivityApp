@@ -24,6 +24,11 @@ export class PomodoroComponent implements AfterViewInit {
   @ViewChild('progressBarNumber') progressBarNumber!: ElementRef<HTMLParagraphElement>;
   @ViewChild('longBreakBtn') longBreakBtn!: ElementRef<HTMLButtonElement>;
 
+  // Audio files
+  private pomodoroSound = new Audio('assets/pomodoro_sounds/pomodoro_over.m4a');
+  private shortBreakSound = new Audio('assets/pomodoro_sounds/short_break.m4a');
+  private longBreakSound = new Audio('assets/pomodoro_sounds/long_break.m4a');
+
   ngAfterViewInit() {
   }
 
@@ -39,10 +44,14 @@ export class PomodoroComponent implements AfterViewInit {
 
       if (this.timerValue === 0) {
         clearInterval(this.progressInterval);
+        this.pomodoroSound.play();
         this.pomCount++;
         this.updatePomCount();
         if (this.pomCount % this.pomodoroUntilLongBreak === 0) {
           this.showLongBreakBtn();
+          this.longBreakSound.play();
+        } else {
+          this.shortBreakSound.play();
         }
         this.setTimeType(this.pomodoroType);
       }
@@ -63,7 +72,7 @@ export class PomodoroComponent implements AfterViewInit {
   setProgressInfo() {
     this.progressBarNumber.nativeElement.textContent = `${this.NumberToString(this.timerValue)}`
     const progressValue = this.timerValue * this.multiplierValue;
-    this.progressBar.nativeElement.style.background = `conic-gradient(rgb(243, 72, 109) ${progressValue}deg, crimson 0deg)`;
+    this.progressBar.nativeElement.style.background = `conic-gradient(#61946f ${progressValue}deg, #3f6644 0deg)`;
   }
 
   NumberToString(numberStr : number) {

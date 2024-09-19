@@ -1,0 +1,15 @@
+header {
+    background-color: #8DD9a1;
+}
+
+.dropdown-toggle, .dropdown-item {
+    cursor: pointer;
+}
+
+h2 {
+    color: #636363;
+}
+
+h5 {
+    color:#636363
+}
