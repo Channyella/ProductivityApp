@@ -26,48 +26,100 @@
 </div>
 
 <div class="register-container">
-<form #loginForm = "ngForm" (ngSubmit)="register()" autocomplete="off">
+<form #loginForm = "ngForm" (ngSubmit)="register(loginForm)" autocomplete="off">
     <h2 class="text-center text-white">Sign Up</h2>
     <br>
-    <div class="mb-3 form-floating">
+    <!-- First Name -->
+    <div class="mb-3 form-floating"> 
         <input type="text" 
         name="firstName" 
         [(ngModel)]="model.firstName" 
         class="form-control me-2" 
-        placeholder="First Name">
+        placeholder="First Name"
+        #firstName ="ngModel"
+        [ngClass]="{'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched) }"
+        required
+        >
         <label>First Name:</label>
+        <div *ngIf="firstName.invalid && firstName.touched" class="text-white">
+            <small *ngIf="firstName.errors?.['required']">First name is required.</small>
+        </div>
     </div>
+
+    <!-- Last Name -->
     <div class="mb-3 form-floating">
         <input type="text" 
         name="lastName" 
         [(ngModel)]="model.lastName" 
         class="form-control me-2" 
-        placeholder="Last Name">
+        placeholder="Last Name"
+        #lastName="ngModel"
+        [ngClass]="{'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched) }"
+        required
+        >
         <label>Last Name:</label>
+        <div *ngIf="lastName.invalid && lastName.touched" class="text-white">
+            <small *ngIf="lastName.errors?.['required']">Last name is required.</small>
+        </div>
     </div>
+
+    <!-- E-mail -->
     <div class="mb-3 form-floating">
         <input type="email" 
         name="email" 
         [(ngModel)]="model.email" 
         class="form-control me-2" 
-        placeholder="E-mail">
+        placeholder="E-mail"
+        #email="ngModel"
+        [ngClass]="{'is-invalid': email.invalid && email.touched }"
+        required
+        email
+        >
         <label>E-mail:</label>
+        <div *ngIf="email.invalid && email.touched" class="text-white">
+            <small *ngIf="email.errors?.['required']">Email is required.</small>
+            <small *ngIf="email.errors?.['email']">Invalid email format.</small>
+        </div>
     </div>
+
+    <!-- Password-->
     <div class="mb-3 form-floating">
         <input type="password" 
         name="password" 
         [(ngModel)]="model.password" 
         class="form-control me-2" 
-        placeholder="Password">
+        placeholder="Password"
+        #password="ngModel"
+        required
+        minlength="8"
+        [ngModelOptions]="{updateOn: 'blur'}"
+        [ngClass]="{'is-invalid': password.invalid && password.touched}"
+        appPasswordStrength
+        >
         <label>Password:</label>
+        <div *ngIf="password.invalid && password.touched" class="text-white">
+            <small *ngIf="password.errors?.['required']">Password is required.</small>
+            <small *ngIf="password.errors?.['minlength']">Password must be at least 8 characters.</small>
+            <small *ngIf="password.errors?.['passwordStrength']" >Password must contain at least one number and one special character.</small>
+        </div>
     </div>
+
+    <!-- Password Matching Validator -->
     <div class="mb-3 form-floating">
         <input type="password" 
         name="verifyPassword" 
         [(ngModel)]="model.verifyPassword" 
         class="form-control me-2" 
-        placeholder="Re-enter Password">
+        placeholder="Re-enter Password"
+        #verifyPassword="ngModel"
+        [ngClass]="{'is-invalid': verifyPassword.invalid && verifyPassword.touched}"
+        required
+        >
         <label>Confirm Password:</label>
+        <div *ngIf="verifyPassword.invalid && verifyPassword.touched" class="text-white">
+            <small *ngIf="verifyPassword.errors?.['required']">Password confirmation is required.</small>
+            <small *ngIf="model.password !== model.verifyPassword && verifyPassword.touched">Passwords must match.</small>
+        </div>
     </div>
     <div class="form-group text-center">
         <button class="btn btn-default me-2" type="submit">Register</button>

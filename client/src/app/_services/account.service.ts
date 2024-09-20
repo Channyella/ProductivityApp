@@ -27,11 +27,6 @@ export class AccountService {
   }
 
   register(model: any) {
-    // validation
-    if(model.password !== model.verifyPassword) {
-      alert("Passwords do not match")
-      return;
-    }
     return this.http.post<User>(this.baseUrl + '/account/register', model).pipe(
       map(user => {
         if (user) {
