@@ -1,0 +1,43 @@
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #8dd9a1;
+    padding-bottom: 20px;
+}
+
+.title {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color:#636363;
+}
+
+.register-container {
+    background-color: #ed6456;
+    height: 80%;
+    width: 50%;
+    border-radius: 15px;
+    text-align: center;
+    padding: 40px;
+}
+
+input {
+    width: 100%;
+}
+
+.register-container button {
+    background-color: white;
+    color: #636363; 
+}
+
+h4 {
+    color:#636363;
+}
+
+.pomodoro-btn {
+    background-color: white;
+    color: #636363; 
+}
+
+

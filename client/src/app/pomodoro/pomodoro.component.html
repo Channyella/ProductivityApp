@@ -1,6 +1,6 @@
 
 <div class="pomodoro-container">
-    <img width="10%" height="50%" src="assets/pomodoer_assets/tomato.png">
+    <img class="tomato" width="13%" height="50%" src="assets/pomodoer_assets/tomato.png">   
     <div class="timer-container">  
         <div #pomodoroCount class="pomodoro-count"></div>
         <div #progressBar class="progressbar">
@@ -38,4 +38,35 @@
                 (click)="resetTimer()">Reset</button>
         </div>
     </div>
+    <button class="btn info-image" (click)="openModal()" >
+        <img class="info-image" src="assets/info.png">
+    </button>
+
+    <app-info-modal *ngIf="isModalOpen" [title]="'Using a Pomodoro Timer'" (close)="closeModal()">
+        <p>The Pomodoro technique is a time management method.</p>
+        <p>It involves focusing for work intervals of 25 minutes, taking a short 5 minute break in-between for four cycles, aka a 'pomodoro'. Afterwards take a longer break of 15-30 minutes. (Our timer is 15 minutes long). This helps you stay focused and refreshed to tackle your tasks throughout the day. </p>
+        <br>
+        <h4>Choose a Task</h4>
+        <p>Select a task or project to work on.</p>
+        <br>
+        <h4>Set a Timer</h4>
+        <p>Click on 'pomodoro'. This will start the 25 minute timer. During this time, focus only on the task you chose. This work period is called a 'pomodoro'.</p>
+        <br>
+        <h4>Work Until the Timer Rings</h4>
+        <p>If something pops up during your work time, jot down a note to take care of it during a break if you can. Try to stay focused on your task for the whole pomodoro.</p>
+        <br>
+        <h4>Take a Short Break</h4>
+        <p>After the timer rings, take a 5 minute break. Use this time to relax, stretch, get water, or do something unrelated to your current task.</p>
+        <br>
+        <h4>Repeat the Cycle</h4>
+        <p>After the break, start another pomodoro. Complete four pomodoros, then take a longer break.</p>
+        <br>
+        <h4>Long Break</h4>
+        <p>After completing your four pomodoro cycles, take a longer break, typically 15 to 30 minutes.</p>
+        <p>This will help you refresh and get ready for your next pomodoro cycle.</p>
+        <br>
+        <h4>Happy Task Completing!</h4>
+        <br>
+
+    </app-info-modal>
 </div>

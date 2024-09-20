@@ -15,8 +15,5 @@ export class RegisterComponent {
     console.log(this.model);
   }
 
-  cancel() {
-    console.log('cancelled');
-  }
 
 }

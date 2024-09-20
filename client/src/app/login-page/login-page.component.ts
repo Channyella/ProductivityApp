@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -10,15 +11,14 @@ import { AccountService } from '../_services/account.service';
   styleUrl: './login-page.component.css'
 })
 export class LoginPageComponent {
-  private accountService = inject(AccountService);
-  loggedIn = false;
+  accountService = inject(AccountService);
+  private router = inject(Router);
   model: any = {};
 
   login() {
     this.accountService.login(this.model).subscribe({
       next: response => {
-        console.log(response);
-        this.loggedIn = true;
+        this.router.navigate(['home']);
       },
       error: error => console.log(error)
       }

@@ -1,6 +1,34 @@
+<div class="page-container">
+    <div class="title align-items-center mb-3">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <img
+            class="bi me-2"
+            width="110"
+            height="64"
+            role="img"
+            aria-label="Pomo-Doer"
+            src="/assets/pomodoer_assets/tomatoLeaves.png"
+            style="transform: scaleX(-1);"
+        />
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><h1><a href="login" class="nav-link px-2 link-secondary"> Welcome to Pomo-Doer</a></h1></li>
+        </ul>
+
+        <img
+        class="bi me-2"
+        width="110"
+        height="64"
+        role="img"
+        aria-label="Pomo-Doer"
+        src="/assets/pomodoer_assets/tomatoLeaves.png"/>     
+    </div>
+    <h4 class="text-center">Stay on task with to-do lists and a pomodoro timer!</h4>
+</div>
+
+<div class="register-container">
 <form #loginForm = "ngForm" (ngSubmit)="register()" autocomplete="off">
-    <h2 class="text-center text-success">Sign Up</h2>
-    <hr>
+    <h2 class="text-center text-white">Sign Up</h2>
+    <br>
     <div class="mb-3 form-floating">
         <input type="text" 
         name="firstName" 
@@ -42,10 +70,17 @@
         <label>Confirm Password:</label>
     </div>
     <div class="form-group text-center">
-        <button class="btn btn-success me-2" type="submit">Register</button>
-        <button class="btn btn-default me-2 btn-outline-success" (click)="cancel()" type="button">Cancel</button>
-
+        <button class="btn btn-default me-2" type="submit">Register</button>
     </div>
-
-
 </form>
+<br>
+    <p>Already have an account?   
+        <button class="btn">
+            <a class="nav-link text-decoration-none" href="login">Login Here</a>
+        </button>
+    </p>        
+    </div>
+    <br>
+    <h4 class="text-center">Want to try out a pomodoro timer before making an account?</h4>
+    <button class="btn pomodoro-btn"><a class="nav-link text-decoration-none" href="guest">Pomodoro Timer</a></button>
+</div>

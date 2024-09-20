@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -12,6 +13,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
   styleUrl: './nav.component.css'
 })
 export class NavComponent implements OnInit{
+  accountService = inject(AccountService);
+  private router = inject(Router);
   http = inject(HttpClient);
   title = 'Pomo-Doer';
   users: any;
@@ -27,7 +30,8 @@ export class NavComponent implements OnInit{
   }
 
   logout() {
-    this.loggedIn = false;
+    this.accountService.logout();
+    this.router.navigate(['login']);
   }
 
 }

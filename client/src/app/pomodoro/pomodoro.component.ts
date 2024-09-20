@@ -1,10 +1,11 @@
-import { formatNumber, NgClass } from '@angular/common';
+import { formatNumber, NgClass, NgIf } from '@angular/common';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { InfoModalComponent } from '../info-modal/info-modal.component';
 
 @Component({
   selector: 'app-pomodoro',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, InfoModalComponent, NgIf],
   templateUrl: './pomodoro.component.html',
   styleUrl: './pomodoro.component.css'
 })
@@ -18,6 +19,7 @@ export class PomodoroComponent implements AfterViewInit {
   public multiplierValue: number = 360 / this.timerValue;
   public progressInterval: any;
   public pomodoroType: string = 'POMODORO';
+  public isModalOpen = false;
   
   @ViewChild('pomodoroCount') pomodoroCount!: ElementRef<HTMLDivElement>;
   @ViewChild('progressBar') progressBar!: ElementRef<HTMLHeadingElement>;
@@ -100,6 +102,14 @@ export class PomodoroComponent implements AfterViewInit {
         : this.longBreakTimer;
     this.multiplierValue = 360 / this.timerValue;
     this.setProgressInfo();
+  }
+
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
   }
 
 }

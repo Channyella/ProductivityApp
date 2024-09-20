@@ -1,0 +1,40 @@
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    background-color: #8dd9a1;
+}
+
+.title {
+    margin-bottom: 20px;
+    color:#636363;
+}
+
+.login-container {
+    background-color: #ed6456;
+    height: 50%;
+    width: 40%;
+    border-radius: 15px;
+    text-align: center;
+    padding: 40px;
+}
+
+input {
+    width: 100%;
+}
+
+.login-container button {
+    background-color: white;
+    color: #636363; 
+}
+
+h4 {
+    color:#636363;
+}
+
+.pomodoro-btn {
+    background-color: white;
+    color: #636363; 
+}

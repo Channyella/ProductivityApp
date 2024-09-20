@@ -1,0 +1,21 @@
+header {
+    height: 90px;
+    display: flex;
+    justify-content: start;
+    margin-left: 20px;
+    background-color: white;
+}
+
+.header-content {
+    display: flex;
+    align-content: center;
+}
+
+.guest-contents {
+    height: calc(100vh - 90px);
+    display: flex;
+    align-items: center;
+    overflow-y: hidden;
+    background-color: #8dd9a1;
+}
+
