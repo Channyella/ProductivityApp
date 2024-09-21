@@ -30,7 +30,7 @@ public class ToDoList
     public bool Completed { get; set; } = false;
 
     // Navigation property for AppUser
-    public required AppUser User { get; set; }
+    public AppUser? User { get; set; }
 
     // Navigation property for Tasks
     public ICollection<UserTask> Tasks { get; } = [];
