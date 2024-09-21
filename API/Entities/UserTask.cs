@@ -10,7 +10,7 @@ public class UserTask
     public bool Completed { get; set; } = false;
 
     // Navigation Property for ToDoList
-    public required ToDoList ToDoList { get; set; }
+    public ToDoList? ToDoList { get; set; }
     
     // Navigation property for Subtasks
     public ICollection<Subtask> Subtasks { get; } = [];

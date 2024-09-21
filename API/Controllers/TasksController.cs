@@ -1,4 +1,5 @@
 using API.Data;
+using API.DTOs;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,31 @@ public class TasksController(DataContext context) : BaseApiController
         var task = await context.UserTasks.FindAsync(id);
         if (task == null) return NotFound();
         return task;
+    }
+
+    [HttpGet("todolists/{toDoListId:int}")] // api/tasks/todolists/1
+    public async Task<ActionResult<List<UserTask>>> GetTasksByToDoListId(int toDoListId)
+    {
+        var tasks = await context.UserTasks
+            .Where(task => task.ToDoListId == toDoListId).ToListAsync();
+        if (tasks == null) return NotFound();
+        return tasks;
+    }
+
+    [HttpPost("todolists/{toDoListId:int}")]
+    public async Task<ActionResult<UserTask>> CreateTask(int toDoListId, TaskDto taskDto)
+    {
+        var task = new UserTask
+        {
+            ToDoListId = toDoListId,
+            Description = taskDto.Description,
+            EndDate = taskDto.EndDate,
+            CreateDate = DateOnly.FromDateTime(DateTime.Now)
+        };
+        context.UserTasks.Add(task);
+        await context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetTasksByToDoListId), new { toDoListId = toDoListId, id = task.Id}, task);
     }
 }
 
