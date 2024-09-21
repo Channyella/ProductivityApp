@@ -20,6 +20,7 @@ export class NavComponent implements OnInit{
   users: any;
   model: any = {};
   loggedIn = true;
+  userName = this.getName();
 
   ngOnInit(): void {
     this.http.get('https://localhost:5001/api/users').subscribe({
@@ -32,6 +33,12 @@ export class NavComponent implements OnInit{
   logout() {
     this.accountService.logout();
     this.router.navigate(['login']);
+  }
+
+  private getName()
+  {
+    const user = this.accountService.currentUser();
+    return user?.firstName;
   }
 
 }

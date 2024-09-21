@@ -7,6 +7,7 @@
         <ng-content></ng-content>
     </div>
     <div class="modal-footer">
-        <button class="btn close" (click)="closeModal()">Close</button>
+        <button *ngIf="formModal" class="btn cancel" (click)="closeModal()">Cancel</button>
+        <button class="btn close" (click)="onSubmit()">{{formModal ? 'Submit' : 'Close'}}</button>
     </div>
 </div>

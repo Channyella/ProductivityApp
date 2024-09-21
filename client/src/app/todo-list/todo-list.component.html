@@ -1,1 +1,12 @@
-<p>todo-list works!</p>
+<div *ngIf="toDoListsPromise | async as toDoLists; else loading">
+    <button class="btn btn-success" (click)="openModal()">Add</button>
+    @for (toDoList of toDoLists; track toDoList.id) {
+        <li>{{toDoList.description}}</li>
+    }
+</div>
+
+<ng-template #loading> loading...</ng-template>
+
+<app-info-modal *ngIf="isModalOpen" title="Add ToDo List" (close)="closeModal()" (submit)="submit()" [formModal]="true">
+    <app-add-list-form></app-add-list-form>
+</app-info-modal>

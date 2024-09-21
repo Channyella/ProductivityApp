@@ -49,7 +49,11 @@
     text-align: right;
 }
 
-.close {
+.close, .cancel {
     background-color: #61946f;
     color: white;
+}
+
+.cancel {
+    margin-right: 4px;
 }
