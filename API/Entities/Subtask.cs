@@ -12,5 +12,5 @@ public class Subtask
     public bool Completed { get; set; } = false;
 
     // Navigation Property for UserTask
-    public required UserTask UserTask { get; set; }
+    public UserTask? UserTask { get; set; }
 }
