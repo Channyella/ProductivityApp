@@ -32,6 +32,7 @@ public class AccountController(DataContext context, ITokenService tokenService) 
 
         return new UserDto
         {
+            Id = user.Id,
             FirstName = user.FirstName,
             LastName = user.LastName,
             Email = user.Email,
@@ -58,6 +59,7 @@ public class AccountController(DataContext context, ITokenService tokenService) 
         
         return new UserDto
         {
+            Id = user.Id,
             FirstName = user.FirstName,
             LastName = user.LastName,
             Email = user.Email,
