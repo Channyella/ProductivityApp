@@ -1,7 +1,5 @@
 <div class="register-container">
     <form #registerForm="ngForm" autocomplete="off">
-        <h2 class="text-center text-white">Sign Up</h2>
-        <br>
         <!-- Title -->
         <div class="mb-3 form-floating">
             <input type="text" 
@@ -14,8 +12,8 @@
                 [ngClass]="{'is-invalid': title.invalid && (title.dirty || title.touched) }" 
                 required>
             <label>Title:</label>
-            <div *ngIf="title.invalid && title.touched" class="text-white">
-                <small *ngIf="title.errors?.['required']">Title is required.</small>
+            <div *ngIf="title.invalid && title.touched">
+                <small *ngIf="title.errors?.['required']"  class="text-danger">Title is required.</small>
             </div>
         </div>
 
@@ -31,7 +29,7 @@
                 maxlength="140">
         </textarea>
             <label>Description:</label>
-            <div *ngIf="description?.errors?.['maxlength']" class="text-white">
+            <div *ngIf="description?.errors?.['maxlength']" class="text-danger">
                 <small *ngIf="description?.errors?.['maxlength']">Please shorten description to under 140 characters.</small>
             </div>
         </div>
@@ -45,22 +43,19 @@
             <label for="tag">Tag:</label>
         </div>
 
-            <!-- Date -->
-            <div class="mb-3 form-floating">
-                <input type="date" 
-                        id="endDate" 
-                        name="endDate" 
-                        [(ngModel)]="model.endDate" 
-                        appDateOnlyValidator
-                        [min] ="today"
-                        #endDate="ngModel"
-                        class="form-control"
-                        [ngClass]="{'is-invalid': endDate.invalid && endDate.touched}">
-                <label for="endDate">End Date:</label>
-                
-                <div *ngIf="endDate.errors?.['invalidDateOnly']" class="invalid-feedback">
-                    <small class="text-white">The selected date cannot be before today's date.</small> 
-                </div>
-            </div>
+        <!-- Date -->
+        <div class="mb-3 form-floating">
+            <input type="date" 
+                    id="endDate" 
+                    name="endDate" 
+                    [(ngModel)]="model.endDate" 
+                    appEndDateValidator
+                    [min] ="today"
+                    #endDate="ngModel"
+                    class="form-control"
+                    [ngClass]="{'is-invalid': endDate.invalid && endDate.touched}">
+            <label for="endDate">End Date:</label>
+            <small *ngIf="endDate.errors?.['invalidEndDate']" class="text-danger">The selected date cannot be before today's date.</small> 
+        </div>
     </form>
 </div>

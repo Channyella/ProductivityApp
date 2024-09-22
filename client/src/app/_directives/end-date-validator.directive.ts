@@ -1,5 +1,6 @@
 import { Directive } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
+import { getDateStringAsLocalDate } from '../_helpers/date';
 
 @Directive({
   selector: '[appEndDateValidator]',
@@ -15,7 +16,7 @@ export class EndDateValidatorDirective implements Validator{
   validate(control: AbstractControl): ValidationErrors | null {
     if (!control.value) return null;
 
-    const selectedDate = new Date(control.value);
+    const selectedDate = getDateStringAsLocalDate(control.value);
     const currentDate = new Date();
     // Set time to midnight to compare only the date
     selectedDate.setHours(0, 0, 0, 0);
