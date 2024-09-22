@@ -1,3 +1,7 @@
+:host {
+    position: fixed;
+}
+
 .modal-backdrop {
     position: fixed;
     top: 0;

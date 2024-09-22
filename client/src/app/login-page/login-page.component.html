@@ -26,23 +26,41 @@
     <h4 class="text-center">Stay on task with to-do lists and a pomodoro timer!</h4>
 </div>
     <div class="login-container">       
-        <form #loginForm= "ngForm" (ngSubmit)="login()" autocomplete="off">
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" autocomplete="off">
             <h2 class="text-center text-white mb-3">Please Login</h2>
+
+            <!-- E-mail -->
             <div class="mb-3 form-floating">
                 <input type="email" 
                 name="email" 
                 [(ngModel)]="model.email" 
                 class="form-control me-2" 
-                placeholder="E-mail">
+                placeholder="E-mail"
+                #email="ngModel"
+                [ngClass]="{'is-invalid': email.invalid && email.touched }"
+                required
+                email>
                 <label>E-mail:</label>
+                <div *ngIf="email.invalid && email.touched" class="text-white">
+                    <small *ngIf="email.errors?.['required']">Email is required.</small>
+                    <small *ngIf="email.errors?.['email']">Invalid email format.</small>
+                </div>
             </div>
+
+            <!-- Password -->
             <div class="mb-3 form-floating">
                 <input type="password" 
                 name="password" 
                 [(ngModel)]="model.password" 
                 class="form-control me-2" 
-                placeholder="Password">
+                placeholder="Password"
+                #password="ngModel"
+                [ngClass]="{'is-invalid': password.invalid && password.touched}"
+                required>
                 <label>Password:</label>
+                <div *ngIf="password.invalid && password.touched" class="text-white">
+                    <small *ngIf="password.errors?.['required']">Password is required.</small>
+                </div>
             </div>
             <button class="btn text-center mb-3" type="submit">Login</button>
         </form>

@@ -5,6 +5,7 @@
     flex-direction: column;
     background-color: #8dd9a1;
     padding-bottom: 20px;
+    min-height: 100vh;
 }
 
 .title {
@@ -15,7 +16,7 @@
 
 .register-container {
     background-color: #ed6456;
-    height: 80%;
+    height: 600px;
     width: 50%;
     border-radius: 15px;
     text-align: center;

@@ -1,12 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
@@ -15,12 +16,12 @@ export class LoginPageComponent {
   private router = inject(Router);
   model: any = {};
 
-  login() {
+  login(form: NgForm) {
     this.accountService.login(this.model).subscribe({
       next: response => {
         this.router.navigate(['home']);
       },
-      error: error => console.log(error)
+      error: error => alert('Email or password is incorrect.')
       }
     )
   }

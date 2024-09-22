@@ -17,7 +17,7 @@ export enum Tag {
 export interface CreateToDoListParams {
     title: string;
     description?: string;
-    tag?: Tag;
+    tag?: Tag | undefined;
     endDate?: Date;
 }
 
