@@ -48,4 +48,7 @@ public class SubtasksController(DataContext context) : BaseApiController
         return CreatedAtAction(nameof(GetSubtasksByTaskId), new { taskId = taskId, id = subtask.Id}, subtask);
     }
 
+    [HttpDelete("{id:int}")]
+    public async 
+
 }

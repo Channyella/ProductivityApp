@@ -1,9 +1,32 @@
-<div *ngIf="toDoListsPromise | async as toDoLists; else loading">
-    <button class="btn btn-success" (click)="openModal()">Add</button>
-    @for (toDoList of toDoLists; track toDoList.id) {
-        <li>{{toDoList.title}}</li>
-    }
-</div>
+<div class="list-container">
+    <div class="list-body"  *ngIf="toDoListsPromise | async as toDoLists; else loading">
+        <div class="header-elements">
+            <h2 class="text-white">To-Do Lists</h2>
+            <button class="btn filter-button"><img class="filter-image" src="assets/filterWhite.png"></button>
+            <input class="search-box" type="text">
+            <button class="btn add-button" (click)="openModal()">Add</button>
+        </div>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>End Date</th>
+                    <th>Tag</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let toDoList of toDoLists; trackBy: trackByToDoListId">
+                    <td>{{ toDoList.title }}</td>
+                    <td>{{ toDoList.endDate | date: 'mediumDate' }}</td>
+                    <td>{{toDoList.tag? tagMap.get(toDoList.tag) : ""}}</td>
+                    <td><button class="btn menu-button"><img class="menu-image" src="assets/menuWhite.png"></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> 
 
 <ng-template #loading> loading...</ng-template>
 

@@ -14,6 +14,10 @@ export enum Tag {
     Work,
 }
 
+export const tagPairs: [Tag, string][] = Object.entries(Tag).filter(keyValue => !isNaN(Number(keyValue[0]))).map(rawKeyValue => [Number(rawKeyValue[0]), rawKeyValue[1] as string])
+
+export const tagMap = new Map<Tag, string>(tagPairs);
+
 export interface CreateToDoListParams {
     title: string;
     description?: string;

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ToDoListService } from '../_services/to-do-list.service';
-import { Tag } from '../_models/toDoList';
+import { Tag, tagPairs } from '../_models/toDoList';
 import { EndDateValidatorDirective } from '../_directives/end-date-validator.directive';
 import { getTodaysDateString } from '../_helpers/date';
 import { InfoModalComponent } from '../info-modal/info-modal.component';
@@ -18,7 +18,7 @@ export class AddListFormComponent {
   @Output() close = new EventEmitter<void>();
   
   private toDoListService = inject(ToDoListService);
-  tags: [Tag, string][] = Object.entries(Tag).filter(keyValue => !isNaN(Number(keyValue[0]))).map(rawKeyValue => [Number(rawKeyValue[0]), rawKeyValue[1] as string]);
+  tags: [Tag, string][] = tagPairs;
   public today = getTodaysDateString();
 
   public model = {
