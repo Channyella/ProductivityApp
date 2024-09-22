@@ -24,6 +24,5 @@ export class InfoModalComponent {
     } else {
       this.closeModal();
     }
-    
   }
 }

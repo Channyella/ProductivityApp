@@ -1,61 +1,63 @@
-<div class="register-container">
-    <form #registerForm="ngForm" autocomplete="off">
-        <!-- Title -->
-        <div class="mb-3 form-floating">
-            <input type="text" 
-                id="title"
-                name="title" 
-                [(ngModel)]="model.title" 
-                class="form-control me-2"
-                placeholder="Title" 
-                #title="ngModel"
-                [ngClass]="{'is-invalid': title.invalid && (title.dirty || title.touched) }" 
-                required>
-            <label>Title:</label>
-            <div *ngIf="title.invalid && title.touched">
-                <small *ngIf="title.errors?.['required']"  class="text-danger">Title is required.</small>
+<app-info-modal title="Add ToDo List" (close)="closeModal()" (submit)="submit(addToDoList)" [formModal]="true">
+    <div class="add-to-do-list-container">
+        <form #addToDoList="ngForm" autocomplete="off">
+            <!-- Title -->
+            <div class="mb-3 form-floating">
+                <input type="text" 
+                    id="title"
+                    name="title" 
+                    [(ngModel)]="model.title" 
+                    class="form-control me-2"
+                    placeholder="Title" 
+                    #title="ngModel"
+                    [ngClass]="{'is-invalid': title.invalid && (title.dirty || title.touched) }" 
+                    required>
+                <label>Title:</label>
+                <div *ngIf="title.invalid && title.touched">
+                    <small *ngIf="title.errors?.['required']"  class="text-danger">Title is required.</small>
+                </div>
             </div>
-        </div>
 
-        <!-- Description -->
-        <div class="mb-3 form-floating">
-            <textarea 
-                id="description" 
-                [(ngModel)]="model.description"
-                #description="ngModel" 
-                name="description" 
-                class="form-control"
-                [ngClass]="{'is-invalid': description?.errors?.['maxlength'] }"
-                maxlength="140">
-        </textarea>
-            <label>Description:</label>
-            <div *ngIf="description?.errors?.['maxlength']" class="text-danger">
-                <small *ngIf="description?.errors?.['maxlength']">Please shorten description to under 140 characters.</small>
-            </div>
-        </div>
-
-        <!-- Tag -->
-        <div class="mb-3 form-floating">
-            <select id="tag" [(ngModel)]="model.tag" name="tag" class="form-control">
-                <option [ngValue]="undefined">Select a tag (optional)</option> <!-- Optional tag -->
-                <option *ngFor="let tag of tags" [ngValue]="tag">{{ tag }}</option>
-            </select>
-            <label for="tag">Tag:</label>
-        </div>
-
-        <!-- Date -->
-        <div class="mb-3 form-floating">
-            <input type="date" 
-                    id="endDate" 
-                    name="endDate" 
-                    [(ngModel)]="model.endDate" 
-                    appEndDateValidator
-                    [min] ="today"
-                    #endDate="ngModel"
+            <!-- Description -->
+            <div class="mb-3 form-floating">
+                <textarea 
+                    id="description" 
+                    [(ngModel)]="model.description"
+                    #description="ngModel" 
+                    name="description" 
                     class="form-control"
-                    [ngClass]="{'is-invalid': endDate.invalid && endDate.touched}">
-            <label for="endDate">End Date:</label>
-            <small *ngIf="endDate.errors?.['invalidEndDate']" class="text-danger">The selected date cannot be before today's date.</small> 
-        </div>
-    </form>
-</div>
+                    [ngClass]="{'is-invalid': description?.errors?.['maxlength'] }"
+                    maxlength="140">
+            </textarea>
+                <label>Description:</label>
+                <div *ngIf="description?.errors?.['maxlength']" class="text-danger">
+                    <small *ngIf="description?.errors?.['maxlength']">Please shorten description to under 140 characters.</small>
+                </div>
+            </div>
+
+            <!-- Tag -->
+            <div class="mb-3 form-floating">
+                <select id="tag" [(ngModel)]="model.tag" name="tag" class="form-control">
+                    <option [ngValue]="undefined">Select a tag (optional)</option> <!-- Optional tag -->
+                    <option *ngFor="let tagNamePair of tags" [ngValue]="tagNamePair[0]">{{ tagNamePair[1] }}</option>
+                </select>
+                <label for="tag">Tag:</label>
+            </div>
+
+            <!-- Date -->
+            <div class="mb-3 form-floating">
+                <input type="date" 
+                        id="endDate" 
+                        name="endDate" 
+                        [(ngModel)]="model.endDate" 
+                        appEndDateValidator
+                        [min] ="today"
+                        #endDate="ngModel"
+                        class="form-control"
+                        [ngClass]="{'is-invalid': endDate.invalid && endDate.touched}">
+                <label for="endDate">End Date:</label>
+                <small *ngIf="endDate.errors?.['invalidEndDate']" class="text-danger">The selected date cannot be before today's date.</small> 
+            </div>
+        </form>
+    </div>
+</app-info-modal>

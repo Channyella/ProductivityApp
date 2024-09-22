@@ -8,7 +8,7 @@ import { AddListFormComponent } from '../add-list-form/add-list-form.component';
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [CommonModule, InfoModalComponent, AddListFormComponent],
+  imports: [CommonModule, AddListFormComponent],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css'
 })
@@ -23,9 +23,6 @@ export class TodoListComponent {
 
   closeModal() {
     this.isModalOpen = false;
-  }
-
-  submit() {
-    this.closeModal();
+    this.toDoListsPromise = this.toDoListService.getToDoLists();
   }
 }

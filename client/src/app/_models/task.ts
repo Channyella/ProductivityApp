@@ -1,8 +1,18 @@
 import { Subtask } from "./subtask";
+import { ToDoList } from "./toDoList";
 
-export interface Task {
-    description: string;
-    endDate: Date;
+export interface CreateTaskParams {
+    description: string;    
+    endDate?: Date;
+}
+
+interface OtherTaskProperties  {
+    id: number;
+    toDoListId: number;
+    createDate: Date;
     completed: boolean;
+    toDoList: ToDoList;
     subtasks: Subtask[];
 }
+
+export type Task = CreateTaskParams & OtherTaskProperties;
