@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AccountService } from './account.service';
-import { CreateToDoListParams, ToDoList } from '../_models/toDoList';
-import { firstValueFrom } from 'rxjs';
+import { CreateToDoListParams, ToDoList, UpdateToDoListParams } from '../_models/toDoList';
+import { first, firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +30,23 @@ export class ToDoListService {
     newLists.push(newToDoList); // Adding the new list to the array
     this.cache = Promise.resolve(newLists); // Update the cache
   }
+
+  async updateToDoList(toDoListId: number, updateToDoListParams: UpdateToDoListParams ) {
+    const updateToDoList = await firstValueFrom(this.http.patch<ToDoList>(this.baseUrl + '/todolists/' + toDoListId, updateToDoListParams));
+    const currentToDoListByUser = await this.getToDoLists();
+    const newToDoLists = currentToDoListByUser.slice();
+    const toDoListIndex = newToDoLists.findIndex(tdl => tdl.id != toDoListId);
+    newToDoLists[toDoListIndex] = updateToDoList;
+    this.cache = Promise.resolve(newToDoLists);
+    return updateToDoList;
+  }
+
+  async deleteToDoList(toDoListId: number){
+    await firstValueFrom(this.http.delete<void>(this.baseUrl + '/todolists/' + toDoListId));
+    const currentToDoLists = await this.getToDoLists();
+    const newToDoLists = currentToDoLists.filter(tdl => tdl.id != toDoListId);
+    this.cache = Promise.resolve(newToDoLists);
+  }
+
+
 }

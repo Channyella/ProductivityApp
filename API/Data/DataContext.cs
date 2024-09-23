@@ -57,5 +57,10 @@ public class DataContext(DbContextOptions options) : DbContext(options)
             .Property(st => st.Completed)
             .HasDefaultValue(false);
 
+        modelBuilder.Entity<UserTask>()
+            .HasOne(t => t.ToDoList)
+            .WithMany(l => l.Tasks)
+            .HasForeignKey(t => t.ToDoListId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

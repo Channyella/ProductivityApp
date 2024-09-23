@@ -52,4 +52,45 @@ public class ToDoListsController(DataContext context) : BaseApiController
         return CreatedAtAction(nameof(GetToDoListsByUserId), new { userId = userId, id = toDoList.Id }, toDoList);
     }
 
+    [HttpPatch("{id:int}")]
+    public async Task<ActionResult<ToDoList>> UpdateToDoList(int id, UpdateToDoListDto updateToDoListDto){
+        if (updateToDoListDto == null)
+        {
+            return BadRequest("Invalid data.");
+        }
+
+        var existingToDoList = await context.ToDoLists.FindAsync(id);
+        if (existingToDoList == null)
+        {
+            return NotFound();
+        }
+        if (updateToDoListDto.Title != null)
+        {
+            existingToDoList.Title = updateToDoListDto.Title;
+        }
+        if (updateToDoListDto.Description != null)
+        {
+            existingToDoList.Description = updateToDoListDto.Description;
+        }
+        if (updateToDoListDto.Tag != null)
+        {
+            existingToDoList.Tag = updateToDoListDto.Tag;
+        }
+        if (updateToDoListDto.EndDate != null)
+        {
+            existingToDoList.EndDate = updateToDoListDto.EndDate;
+        }
+        await context.SaveChangesAsync();
+        return existingToDoList;
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task DeleteToDoList(int id){ 
+        var toDoList = await context.ToDoLists.FindAsync(id);
+        if (toDoList != null){
+            context.ToDoLists.Remove(toDoList);
+            await context.SaveChangesAsync();
+        }
+    }
+
 }

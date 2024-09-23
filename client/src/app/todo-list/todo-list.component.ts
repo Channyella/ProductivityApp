@@ -32,4 +32,9 @@ export class TodoListComponent {
     this.isModalOpen = false;
     this.toDoListsPromise = this.toDoListService.getToDoLists();
   }
+
+  async deleteToDoList(toDoListId: number){
+    await this.toDoListService.deleteToDoList(toDoListId);
+    this.toDoListsPromise = this.toDoListService.getToDoLists();
+  }
 }

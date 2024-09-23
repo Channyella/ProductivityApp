@@ -28,7 +28,12 @@ export interface CreateToDoListParams {
 interface OtherToDoListProperties {
     id: number;
     tasks: Task[];
+}
+
+interface OtherUpdateToDoListProperties {
     completed: boolean;
 }
 
-export type ToDoList = CreateToDoListParams & OtherToDoListProperties;
+export type ToDoList = CreateToDoListParams & OtherToDoListProperties & OtherUpdateToDoListProperties;
+
+export type UpdateToDoListParams = CreateToDoListParams & OtherToDoListProperties;

@@ -64,11 +64,11 @@ public class TasksController(DataContext context) : BaseApiController
         {
             existingTask.Description = updateTaskDto.Description;
         }
-            if (updateTaskDto.EndDate != null)
+        if (updateTaskDto.EndDate != null)
         {
             existingTask.EndDate = updateTaskDto.EndDate;
         }
-            if (updateTaskDto.Completed != null)
+        if (updateTaskDto.Completed != null)
         {
             existingTask.Completed = updateTaskDto.Completed.Value;
         }
