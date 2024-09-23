@@ -5,6 +5,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { GuestComponent } from './guest/guest.component';
 import { authGuard } from './_guards/auth.guard';
 import { noAuthGuard } from './_guards/no-auth.guard';
+import { ListViewComponent } from './list-view/list-view.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 export const routes: Routes = [
     {
@@ -17,7 +19,15 @@ export const routes: Routes = [
         path: 'register', component: RegisterComponent, canActivate: [authGuard],
     },
     {
-        path: 'home', component: HomepageComponent, canActivate: [noAuthGuard],
+        path: 'todolist', component: HomepageComponent, canActivate: [noAuthGuard],
+        children: [
+            {
+                path: 'all', component: TodoListComponent
+            },
+            {
+                path: ':id', component: ListViewComponent
+            },
+        ]
     },
     {
         path: '**', component: LoginPageComponent, canActivate: [authGuard],

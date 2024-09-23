@@ -7,7 +7,7 @@ import { firstValueFrom } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TasksService {
+export class TaskService {
   private http = inject(HttpClient);
   baseUrl = 'https://localhost:5001/api';
   private accountService = inject(AccountService);
@@ -31,5 +31,6 @@ export class TasksService {
     const newTasksForList = currentTasksForList.slice(); // Copy the array without new item
     newTasksForList.push(newTask); // Adding the new task to the array
     this.cache.set(listId, Promise.resolve(newTasksForList)); // Update the cache
+    return newTask;
   }
 }

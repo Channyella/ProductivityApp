@@ -19,7 +19,7 @@ export class LoginPageComponent {
   login(form: NgForm) {
     this.accountService.login(this.model).subscribe({
       next: response => {
-        this.router.navigate(['home']);
+        this.router.navigate(['todolist', 'all']);
       },
       error: error => alert('Email or password is incorrect.')
       }

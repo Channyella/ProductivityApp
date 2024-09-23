@@ -4,11 +4,13 @@ import { tagMap, ToDoList } from '../_models/toDoList';
 import { CommonModule } from '@angular/common';
 import { InfoModalComponent } from '../info-modal/info-modal.component';
 import { AddListFormComponent } from '../add-list-form/add-list-form.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [CommonModule, AddListFormComponent],
+  imports: [CommonModule, AddListFormComponent, BsDropdownModule, RouterLink],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css'
 })

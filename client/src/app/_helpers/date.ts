@@ -10,3 +10,11 @@ export function getDateStringAsLocalDate(dateString: string) {
     const [year, month, day] = dateString.split('-').map(Number);
     return new Date(year, month - 1 /* month must be 0 indexed */, day);
 }
+
+export function getDateString(date: Date){
+    const newDate = date;
+    const year = date.getFullYear();
+    const month = String(newDate.getMonth() + 1).padStart(2, '0');
+    const day = String(newDate.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`
+}

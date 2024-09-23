@@ -1,0 +1,142 @@
+:host {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-container {
+    width: 80%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ed6456;
+    padding: 10px 10px;
+    border-radius: 15px;
+    margin: auto;
+}
+
+.list-body {
+    background-color: #ed6456;
+    width: 90%;
+    height: 40%;    
+}
+
+.header-elements {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 20px 0px 20px;
+    border-radius: 15px;
+    align-items: center;
+}
+
+.right-header-elements{
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+
+}
+
+.search-box{
+    box-sizing: border-box;
+    border: 2px solid #636363;
+    border-radius: 3px;
+    font-size: 16px;
+    background-image: url('/assets/searchGrey.png');
+    background-size: 28px, 28px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+}
+
+.menu-button, .filter-button, .delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #61946f;
+    height: 34px;
+    width: 34px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.back-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #61946f;
+    height: 45px;
+    width: 45px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-button:hover, 
+.filter-button:hover, 
+.back-button:hover, 
+.delete-button:hover {
+    background-color: #3f6644;
+    color: white; 
+}
+
+.menu-image, .filter-image, .back-image, .delete-image {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+hr {
+    margin: 1rem 0;
+    color: white;
+    background-color: currentColor;
+    border: 0;
+    border-top: 2px solid white;
+    margin-top: 5px;
+}
+
+.text-decoration-line-through {
+    text-decoration: line-through;
+}
+
+input[type=checkbox]{
+    accent-color: green;
+}
+
+.button-like {
+    display: inline-block;
+    padding: 10px 20px 5px 20px;
+    background-color: #3f6644; /* Button-like background color */
+    color: white;              /* Text color */
+    border: none;              /* No border */
+    border-radius: 5px;         /* Rounded corners */
+    text-align: center;         /* Center the text */
+    font-size: 16px;            /* Text size */
+    font-weight: bold;          /* Bold text */
+    cursor: default;            /* Prevent the hand pointer */
+}
+
+.add-task{
+    background-color: white;
+}
+
+.add-task button {
+    background-color: #61946f;
+    color:white;
+}
+
+.add-task button:hover {
+    background-color: #3f6644;
+    color:white;
+}
+
+.due {
+    margin-bottom: 0px;
+    text-align: center;
+}

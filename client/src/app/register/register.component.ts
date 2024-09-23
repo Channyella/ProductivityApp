@@ -29,7 +29,7 @@ export class RegisterComponent {
       this.accountService.register(this.model)?.subscribe({
         next: response => {
           console.log(response);
-          this.router.navigate(['home']);
+          this.router.navigate(['todolist', 'all']);
         },
         error: error => console.log(error),
       })

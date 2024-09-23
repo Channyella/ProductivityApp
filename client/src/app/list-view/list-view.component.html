@@ -1,0 +1,68 @@
+<div class="list-container">
+    <div class="list-body"  *ngIf="dataPromise | async as data; else loading">
+        <div class="header-elements">
+            <h2 class="text-white">{{data.toDoList.title}}</h2>
+            <div class="right-header-elements">
+                <h5 class="text-white due me-5">Due By: {{data.toDoList.endDate}}</h5>
+                <div class="button-like me-5"><h5 class="text-white">{{data.toDoList.tag? tagMap.get(data.toDoList.tag) : ""}}</h5></div>
+                <button class="btn back-button" (click)="openModal()">
+                    <a [routerLink]="['/todolist/all']">
+                    <img class="back-image" src="assets/backArrowWhite.png">
+                    </a>
+                </button>
+            </div>
+        </div>
+        <hr>
+        <p class="text-white">{{data.toDoList.description}}</p>
+        
+        <table class="table">
+            <tbody>
+                <!-- Tasks -->
+                <tr *ngFor="let task of data.tasks; trackBy: trackByTaskId">
+                    <td> <input type="checkbox" class="form-check-input" [(ngModel)]="task.completed"> </td>
+                    <td [ngClass]="{'text-decoration-line-through': task.completed}">{{ task.description }}</td>
+                    <td>{{ task.endDate | date: 'mediumDate' }}</td>
+                    <td><button class="btn delete-button" (click)="openModal()">
+                            <img class="delete-image" src="assets/closeWhite.png">
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf=""></tr>
+            </tbody>
+
+            <!-- Adding a task -->
+            <tr class="add-task">
+                <td></td>
+                <td>
+                    <input type="text" 
+                    class="form-control" 
+                    placeholder="New task description" 
+                    [(ngModel)]="model.description"
+                    #description="ngModel"
+                    [ngClass]="{'is-invalid': description.invalid && (description.dirty || description.touched)}" 
+                    required>
+                </td>
+                <td>
+                    <input type="date" 
+                    id="endDate" 
+                    name="endDate" 
+                    [(ngModel)]="model.endDate" 
+                    appEndDateValidator
+                    [min] ="today"
+                    [max] ="data.toDoList.endDate"
+                    #endDate="ngModel"
+                    class="form-control"
+                    [ngClass]="{'is-invalid': endDate.invalid && endDate.touched}">
+                </td>
+                <td>
+                    <button class="btn add-button" (click)="addTask()">Add Task</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div> 
+
+<ng-template #loading> loading...</ng-template>
+
+<!--<app-add-list-form  *ngIf="isModalOpen" (close)="closeModal()"></app-add-list-form>-->
+

@@ -2,16 +2,18 @@
     <div class="list-body"  *ngIf="toDoListsPromise | async as toDoLists; else loading">
         <div class="header-elements">
             <h2 class="text-white">To-Do Lists</h2>
-            <button class="btn filter-button"><img class="filter-image" src="assets/filterWhite.png"></button>
-            <input class="search-box" type="text">
-            <button class="btn add-button" (click)="openModal()">Add</button>
+                <div class="right-header-elements">
+                    <button class="btn filter-button me-3"><img class="filter-image" src="assets/filterWhite.png"></button>
+                    <input class="search-box me-3" type="text">
+                    <button class="btn add-button" (click)="openModal()">Add</button>
+            </div>
         </div>
         
         <table class="table">
             <thead>
                 <tr>
                     <th>Title</th>
-                    <th>End Date</th>
+                    <th>Due Date</th>
                     <th>Tag</th>
                     <th></th>
                 </tr>
@@ -21,7 +23,22 @@
                     <td>{{ toDoList.title }}</td>
                     <td>{{ toDoList.endDate | date: 'mediumDate' }}</td>
                     <td>{{toDoList.tag? tagMap.get(toDoList.tag) : ""}}</td>
-                    <td><button class="btn menu-button"><img class="menu-image" src="assets/menuWhite.png"></button></td>
+                    <td dropdown class="dropdown">
+                        <button dropdownToggle class="btn menu-button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img class="menu-image" src="assets/menuWhite.png">
+                        </button>
+                        <ul *dropdownMenu class="dropdown-menu text-small">
+                            <li><a class="dropdown-item" [routerLink]="['/todolist/' , toDoList.id]"> View </a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item">Edit </a> </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item">Delete </a> </li>
+                        </ul>
+                    </td>
                 </tr>
             </tbody>
         </table>

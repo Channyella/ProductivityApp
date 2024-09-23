@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SubstasksService {
+export class SubtaskService {
   private http = inject(HttpClient)
   baseUrl = 'https://localhost:5001/api';
   private cache: Map<number, Promise<Subtask[]>> = new Map();
