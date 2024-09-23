@@ -6,7 +6,7 @@
                 <h5 class="text-white due me-5">Due By: {{data.toDoList.endDate}}</h5>
                 <div class="button-like me-5"><h5 class="text-white">{{data.toDoList.tag? tagMap.get(data.toDoList.tag) : ""}}</h5></div>
                 <button class="btn back-button" (click)="openModal()">
-                    <a [routerLink]="['/todolist/all']">
+                    <a [routerLink]="['/todolist', 'all']">
                     <img class="back-image" src="assets/backArrowWhite.png">
                     </a>
                 </button>

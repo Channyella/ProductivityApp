@@ -12,7 +12,7 @@
             style="transform: scaleX(-1);"
         />
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><h1><a href="login" class="nav-link px-2 link-secondary"> Welcome to Pomo-Doer</a></h1></li>
+            <li><h1><a [routerLink]="['/login']" class="nav-link px-2 link-secondary"> Welcome to Pomo-Doer</a></h1></li>
         </ul>
 
         <img
@@ -66,11 +66,11 @@
         </form>
         <p>Need an account?   
             <button class="btn">
-                <a class="nav-link text-decoration-none" href="register">Click here</a>
+                <a class="nav-link text-decoration-none"  [routerLink]="['/register']">Click here</a>
             </button>
         </p>        
     </div>
     <br>
     <h4 class="text-center">Want to try out a pomodoro timer before making an account?</h4>
-    <button class="btn pomodoro-btn"><a class="nav-link text-decoration-none" href="guest">Pomodoro Timer</a></button>
+    <button class="btn pomodoro-btn"><a class="nav-link text-decoration-none" [routerLink]="['/guest']">Pomodoro Timer</a></button>
 </div>

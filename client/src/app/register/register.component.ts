@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { AbstractControl, FormsModule, NgForm, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PasswordStrengthDirective } from '../_directives/password-strength.directive';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, CommonModule, PasswordStrengthDirective],
+  imports: [FormsModule, CommonModule, PasswordStrengthDirective, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })

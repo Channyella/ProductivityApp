@@ -12,7 +12,7 @@
         />
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><h2><a href="todolist/all" class="nav-link px-2 link-secondary">Pomo-Doer</a></h2></li>
+            <li><h2><a  [routerLink]="['/todolist', 'all']" class="nav-link px-2 link-secondary">Pomo-Doer</a></h2></li>
         </ul>
 
         <h5 class="me-3"> Welcome {{userName}} </h5>
@@ -22,8 +22,6 @@
             <img src="/assets/pomodoer_assets/favicon.ico" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul *dropdownMenu class="dropdown-menu text-small">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item"(click)="logout()">Logout</a></li>
             </ul>
         </div>
