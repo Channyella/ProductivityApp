@@ -35,7 +35,7 @@ export class ToDoListService {
     const updateToDoList = await firstValueFrom(this.http.patch<ToDoList>(this.baseUrl + '/todolists/' + toDoListId, updateToDoListParams));
     const currentToDoListByUser = await this.getToDoLists();
     const newToDoLists = currentToDoListByUser.slice();
-    const toDoListIndex = newToDoLists.findIndex(tdl => tdl.id != toDoListId);
+    const toDoListIndex = newToDoLists.findIndex(tdl => tdl.id == toDoListId);
     newToDoLists[toDoListIndex] = updateToDoList;
     this.cache = Promise.resolve(newToDoLists);
     return updateToDoList;

@@ -13,3 +13,14 @@ h2 {
 h5 {
     color:#636363
 }
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: #61946f !important; 
+    color: white !important; 
+}
+
+.dropdown-item:hover {
+    background-color: #61946f !important;
+    color: white !important;
+}

@@ -36,4 +36,4 @@ interface OtherUpdateToDoListProperties {
 
 export type ToDoList = CreateToDoListParams & OtherToDoListProperties & OtherUpdateToDoListProperties;
 
-export type UpdateToDoListParams = CreateToDoListParams & OtherToDoListProperties;
+export type UpdateToDoListParams = Partial<CreateToDoListParams & OtherUpdateToDoListProperties>;

@@ -3,8 +3,7 @@
         <div class="header-elements">
             <h2 class="text-white">To-Do Lists</h2>
                 <div class="right-header-elements">
-                    <button class="btn filter-button me-3"><img class="filter-image" src="assets/filterWhite.png"></button>
-                    <input class="search-box me-3" type="text">
+                    <input class="search-box me-3" type="text" [(ngModel)]="search">
                     <button class="btn add-button" (click)="openModal()">Add</button>
             </div>
         </div>
@@ -19,27 +18,29 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let toDoList of toDoLists; trackBy: trackByToDoListId">
-                    <td>{{ toDoList.title }}</td>
-                    <td>{{ toDoList.endDate | date: 'mediumDate' }}</td>
-                    <td>{{toDoList.tag? tagMap.get(toDoList.tag) : ""}}</td>
-                    <td dropdown class="dropdown">
-                        <button dropdownToggle class="btn menu-button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="menu-image" src="assets/menuWhite.png">
-                        </button>
-                        <ul *dropdownMenu class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" [routerLink]="['/todolist/' , toDoList.id]"> View </a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item">Edit </a> </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" (click)="deleteToDoList(toDoList.id)">Delete </a> </li>
-                        </ul>
-                    </td>
-                </tr>
+                <ng-container *ngFor="let toDoList of toDoLists; trackBy: trackByToDoListId">
+                    <tr *ngIf="isIncludedInSearch(toDoList)">
+                        <td>{{ toDoList.title }}</td>
+                        <td>{{ toDoList.endDate | date: 'mediumDate' }}</td>
+                        <td>{{toDoList.tag? tagMap.get(toDoList.tag) : ""}}</td>
+                        <td dropdown class="dropdown">
+                            <button dropdownToggle class="btn menu-button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img class="menu-image" src="assets/menuWhite.png">
+                            </button>
+                            <ul *dropdownMenu class="dropdown-menu text-small">
+                                <li><a class="dropdown-item" [routerLink]="['/todolist/' , toDoList.id]"> View </a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" (click)="editList(toDoList)">Edit </a> </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" (click)="deleteToDoList(toDoList.id)">Delete </a> </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </ng-container>
             </tbody>
         </table>
     </div>
@@ -47,4 +48,4 @@
 
 <ng-template #loading> loading...</ng-template>
 
-<app-add-list-form  *ngIf="isModalOpen" (close)="closeModal()"></app-add-list-form>
+<app-add-list-form  *ngIf="isModalOpen" [list]="listToEdit" (close)="closeModal()"></app-add-list-form>

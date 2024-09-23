@@ -6,11 +6,12 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
 import { AddListFormComponent } from '../add-list-form/add-list-form.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [CommonModule, AddListFormComponent, BsDropdownModule, RouterLink],
+  imports: [CommonModule, AddListFormComponent, BsDropdownModule, RouterLink, FormsModule],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css'
 })
@@ -19,10 +20,19 @@ export class TodoListComponent {
   protected toDoListsPromise: Promise<ToDoList[]> = this.toDoListService.getToDoLists();
   public isModalOpen = false;
   protected tagMap = tagMap;
+  protected listToEdit: ToDoList | undefined;
+  protected search: string = '';
 
   trackByToDoListId(index: number, toDoList: any): number {
     return toDoList.id;
-}
+  }
+
+  isIncludedInSearch(list: ToDoList): boolean {
+    if(!this.search) {
+      return true;
+    }
+    return list.title.includes(this.search) || !!list.description?.includes(this.search) || (!!list.tag && !!this.tagMap.get(list.tag)?.includes(this.search));
+  }
 
   openModal() {
     this.isModalOpen = true;
@@ -31,6 +41,12 @@ export class TodoListComponent {
   closeModal() {
     this.isModalOpen = false;
     this.toDoListsPromise = this.toDoListService.getToDoLists();
+    this.listToEdit = undefined;
+  }
+
+  editList(list: ToDoList) {
+    this.listToEdit = list;
+    this.openModal();
   }
 
   async deleteToDoList(toDoListId: number){
