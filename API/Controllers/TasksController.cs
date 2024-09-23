@@ -47,5 +47,44 @@ public class TasksController(DataContext context) : BaseApiController
 
         return CreatedAtAction(nameof(GetTasksByToDoListId), new { toDoListId = toDoListId, id = task.Id}, task);
     }
+
+    [HttpPatch("{id:int}")]
+    public async Task<ActionResult<UserTask>> UpdateTask(int id, UpdateTaskDto updateTaskDto){
+        if (updateTaskDto == null)
+        {
+            return BadRequest("Invalid data.");
+        }
+
+        var existingTask = await context.UserTasks.FindAsync(id);
+        if (existingTask == null)
+        {
+            return NotFound();
+        }
+        if (updateTaskDto.Description != null)
+        {
+            existingTask.Description = updateTaskDto.Description;
+        }
+            if (updateTaskDto.EndDate != null)
+        {
+            existingTask.EndDate = updateTaskDto.EndDate;
+        }
+            if (updateTaskDto.Completed != null)
+        {
+            existingTask.Completed = updateTaskDto.Completed.Value;
+        }
+        await context.SaveChangesAsync();
+        return existingTask;
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> DeleteTask(int id){
+        var task = await context.UserTasks.FindAsync(id);
+        if (task == null){
+            return NotFound();
+        }
+        context.UserTasks.Remove(task);
+        await context.SaveChangesAsync();
+        return NoContent();
+    }
 }
 

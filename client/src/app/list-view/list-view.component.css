@@ -122,16 +122,32 @@ input[type=checkbox]{
     cursor: default;            /* Prevent the hand pointer */
 }
 
-.add-task{
+.add-task, .update-task{
     background-color: white;
 }
 
-.add-task button {
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled),
+button:not(:disabled) {
     background-color: #61946f;
     color:white;
 }
 
-.add-task button:hover {
+.add-task button, .update-button button, .cancel-button button {
+    background-color: #61946f;
+    color:white;
+}
+
+[type=button]:not(:disabled):hover,
+[type=reset]:not(:disabled):hover,
+[type=submit]:not(:disabled):hover,
+button:not(:disabled):hover {
+    background-color: #3f6644; 
+    color: white; 
+}
+
+.add-task button:hover, .update-button button:hover, .cancel-button button:hover {
     background-color: #3f6644;
     color:white;
 }
@@ -140,3 +156,17 @@ input[type=checkbox]{
     margin-bottom: 0px;
     text-align: center;
 }
+
+.custom-checkbox:checked {
+    background-color: #28a745; 
+    border-color: #28a745; 
+}
+
+.custom-checkbox:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); 
+}
+
+.custom-checkbox {
+    border-color: #28a745; 
+}
+

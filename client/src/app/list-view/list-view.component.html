@@ -18,16 +18,45 @@
         <table class="table">
             <tbody>
                 <!-- Tasks -->
-                <tr *ngFor="let task of data.tasks; trackBy: trackByTaskId">
-                    <td> <input type="checkbox" class="form-check-input" [(ngModel)]="task.completed"> </td>
-                    <td [ngClass]="{'text-decoration-line-through': task.completed}">{{ task.description }}</td>
-                    <td>{{ task.endDate | date: 'mediumDate' }}</td>
-                    <td><button class="btn delete-button" (click)="openModal()">
-                            <img class="delete-image" src="assets/closeWhite.png">
-                        </button>
-                    </td>
-                </tr>
-                <tr *ngIf=""></tr>
+                 <ng-container *ngFor="let task of data.tasks; trackBy: trackByTaskId">
+                    <tr *ngIf="selected != task.id" (dblclick)="selectTask(task)">
+                        <td> <input type="checkbox" class="form-check-input custom-checkbox" [(ngModel)]="task.completed" (ngModelChange)="toggleTaskComplete(task)"> </td>
+                        <td [ngClass]="{'text-decoration-line-through': task.completed}">{{ task.description }}</td>
+                        <td>{{ task.endDate | date: 'mediumDate' }}</td>
+                        <td><button class="btn delete-button" (click)="deleteTask(task.id, data.toDoList.id)">
+                                <img class="delete-image" src="assets/closeWhite.png">
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="selected == task.id" class="update-task">
+                        <td></td>
+                        <td>
+                            <input type="text" 
+                            class="form-control" 
+                            placeholder="New task description" 
+                            [(ngModel)]="updateModel.description"
+                            #description="ngModel"
+                            [ngClass]="{'is-invalid': description.invalid && (description.dirty || description.touched)}" 
+                            required>
+                        </td>
+                        <td>
+                            <input type="date" 
+                            id="endDate" 
+                            name="endDate" 
+                            [(ngModel)]="updateModel.endDate" 
+                            appEndDateValidator
+                            [min] ="today"
+                            [max] ="data.toDoList.endDate"
+                            #endDate="ngModel"
+                            class="form-control"
+                            [ngClass]="{'is-invalid': endDate.invalid && endDate.touched}">
+                        </td>
+                        <td>
+                            <button class="btn update-button me-3" (click)="updateTask(task.id)">Update</button>
+                            <button class="btn cancel-button" (click)="selectTask(undefined)">Cancel</button>
+                        </td>
+                    </tr>
+                </ng-container>
             </tbody>
 
             <!-- Adding a task -->

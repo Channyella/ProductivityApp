@@ -31,7 +31,7 @@ export class RegisterComponent {
           console.log(response);
           this.router.navigate(['todolist', 'all']);
         },
-        error: error => console.log(error),
+        error: error => alert('Email is already taken. Please login or register a new email.'),
       })
     }
   }

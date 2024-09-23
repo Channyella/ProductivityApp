@@ -3,7 +3,7 @@ import { ToDoListService } from '../_services/to-do-list.service';
 import { TaskService } from '../_services/task.service';
 import { SubtaskService } from '../_services/subtask.service';
 import { tagMap, ToDoList } from '../_models/toDoList';
-import { Task } from '../_models/task';
+import { CreateTaskParams, Task, UpdateTaskParams } from '../_models/task';
 import { CommonModule } from '@angular/common';
 import { Subtask } from '../_models/subtask';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -33,8 +33,14 @@ export class ListViewComponent {
   protected listId = Number(this.route.snapshot.paramMap.get('id'));
   protected dataPromise: Promise<ListViewData> = this.getData();
   public today = getTodaysDateString();
+  protected selected?: number | undefined;
 
-  public model = {
+  public model: CreateTaskParams = {
+    description: '',
+    endDate: undefined,
+  }
+
+  public updateModel: CreateTaskParams = {
     description: '',
     endDate: undefined,
   }
@@ -58,8 +64,48 @@ export class ListViewComponent {
     }
   }
 
+  selectTask(task: Task | undefined) {
+    if(task) {
+      this.selected = task.id;
+      this.updateModel = {
+        description: task.description,
+        endDate: task.endDate,
+      }
+    } else {
+      this.selected = undefined;
+      this.updateModel = {
+        description: '',
+        endDate: undefined,
+      }
+    }
+  }
+
   async addTask() {
     const task = await this.taskService.addTask(this.listId, this.model);
+    this.dataPromise = this.getData();
+    this.model = {
+      description: '',
+      endDate: undefined,
+    };
+  }
+
+  async updateTask(taskId: number) {
+    await this.taskService.updateTask(taskId, this.updateModel);
+    this.dataPromise = this.getData();
+    this.updateModel = {
+      description: '',
+      endDate: undefined,
+    };
+    this.selected = undefined;
+  }
+
+  async toggleTaskComplete(task: Task) {
+    await this.taskService.updateTask(task.id, {completed: task.completed});
+    this.dataPromise = this.getData();
+  }
+
+  async deleteTask(taskId: number, listId: number) {
+    await this.taskService.deleteTask(taskId, listId);
     this.dataPromise = this.getData();
   }
 

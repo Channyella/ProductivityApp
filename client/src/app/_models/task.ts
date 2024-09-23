@@ -6,13 +6,21 @@ export interface CreateTaskParams {
     endDate?: Date;
 }
 
+interface OtherUpdateTaskProperties {
+    completed: boolean;
+}
+
+type AllUpdatableTaskProperties = CreateTaskParams & OtherUpdateTaskProperties;
+
 interface OtherTaskProperties  {
     id: number;
     toDoListId: number;
     createDate: Date;
-    completed: boolean;
     toDoList: ToDoList;
     subtasks: Subtask[];
 }
 
-export type Task = CreateTaskParams & OtherTaskProperties;
+export type Task = CreateTaskParams & OtherTaskProperties & AllUpdatableTaskProperties;
+
+export type UpdateTaskParams = Partial<AllUpdatableTaskProperties>;
+

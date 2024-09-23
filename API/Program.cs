@@ -11,8 +11,12 @@ var app = builder.Build();
 app.UseRouting();
 
 // Configure the HTTP request pipeline.
-app.UseCors(x => x.AllowAnyHeader().AllowAnyHeader()
-    .WithOrigins("http://localhost:4200", "https://localhost:4200"));
+app.UseCors(x => 
+        x.AllowAnyHeader()
+            .WithOrigins("http://localhost:4200", "https://localhost:4200")
+            .WithMethods("GET", "POST", "PUT", "PATCH", "DELETE")
+    );
+    
 
 app.UseAuthentication();
 app.UseAuthorization();
